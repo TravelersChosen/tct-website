@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.e8d87f65.css",
-    "main.js": "/static/js/main.c71894e5.js",
-    "static/js/453.e881d3b6.chunk.js": "/static/js/453.e881d3b6.chunk.js",
-    "static/media/logo.png": "/static/media/logo.5634147aaa0897043985.png",
-    "index.html": "/index.html",
-    "main.e8d87f65.css.map": "/static/css/main.e8d87f65.css.map",
-    "main.c71894e5.js.map": "/static/js/main.c71894e5.js.map",
-    "453.e881d3b6.chunk.js.map": "/static/js/453.e881d3b6.chunk.js.map"
+    "main.css": "/tct-website/static/css/main.e8d87f65.css",
+    "main.js": "/tct-website/static/js/main.660bce2e.js",
+    "static/js/453.e881d3b6.chunk.js": "/tct-website/static/js/453.e881d3b6.chunk.js",
+    "static/media/logo.png": "/tct-website/static/media/logo.5634147aaa0897043985.png",
+    "index.html": "/tct-website/index.html",
+    "main.e8d87f65.css.map": "/tct-website/static/css/main.e8d87f65.css.map",
+    "main.660bce2e.js.map": "/tct-website/static/js/main.660bce2e.js.map",
+    "453.e881d3b6.chunk.js.map": "/tct-website/static/js/453.e881d3b6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e8d87f65.css",
-    "static/js/main.c71894e5.js"
+    "static/js/main.660bce2e.js"
   ]
 }
