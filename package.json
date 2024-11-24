@@ -1,7 +1,7 @@
 {
   "name": "tct-website",
   "version": "0.1.0",
-  "homepage": "https://gitname.github.io/TravelersChosenWebsite",
+  "homepage": "http://travelerschosen.org",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

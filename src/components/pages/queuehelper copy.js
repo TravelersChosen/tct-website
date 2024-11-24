@@ -15,16 +15,104 @@ function QueueHelper(){
             <header className="QueueHelper-header">
                 <h1 class = "title">Twitch Checkpoint Bot Queue Helper </h1>
             </header>
-            <p id = "temp">Temp Wording</p>
-            <button onClick= {clickme}>Button </button>
+            
+            <p class="bungie-name">Bungie Name: <input type="text" id="bungiename" onkeyup="bungienamevalidator()" placeholder="bungiename#0000"/>
+                <a class = "help" href="https://discord.gg/kbBbxaeAAy" ><img class = "help" src ="https://cdn-icons-png.flaticon.com/512/4945/4945973.png" ></img></a>
+            </p>
+            <div class="flex-parent selectorButtons">
+            <button id="raidsSelect" class="activitytype" type="button" onclick="selectRaids()">Raids</button>
+            <button id="dungeonsSelect" class="activitytype" type="button" onclick="selectDungeons()">Dungeons</button>
+            <button id="storySelect" class="activitytype" type="button" onclick="selectOtherActivity()">Stories/Other</button>
+            </div>
+            <div class="mainButtons">
+                <div class="actContainer">
+                    <div id="raidsContainer" class="column33" style={{display: 'block'}}>
+                        <div id="raidsButtonContainer" class="column50">
+                            <p class="typeText">Raid:</p>
+                            <button class="activity" type="button" onClick="selectActivity('Salvation\'s Edge')">Salvation's Edge</button>
+                            <button class="activity" type="button" onclick="selectActivity('Crota\'s End')">Crota's End</button>
+                            <button class="activity" type="button" onclick="selectActivity('Root of Nightmares')">Root of Nightmares</button>
+                            <button class="activity" type="button" onclick="selectActivity('King\'s Fall')">King's Fall</button>
+                            <button class="activity" type="button" onclick="selectActivity('Vow of the Disciple')">Vow of the Disciple</button>
+                            <button class="activity" type="button" onclick="selectActivity('Vault of Glass')">Vault of Glass</button>
+                            <button class="activity" type="button" onclick="selectActivity('Deep Stone Crypt')">Deep Stone Crypt</button>
+                            <button class="activity" type="button" onclick="selectActivity('Garden of Salvation')">Garden of Salvation</button>
+                            <button class="activity" type="button" onclick="selectActivity('Last Wish')">Last Wish</button>
+                        </div>
+                    </div>
+                    <div id="dungeonsContainer" class="column33" style={{display:'none'}}>
+                        <div id="dungeonsButtonContainer" class="column50">
+                            <p class="typeText">Dungeon:</p>
+                            <button class="activity" type="button" onclick="selectActivity('Warlord\'s Ruin')">Warlord's Ruin</button>
+                            <button class="activity" type="button" onclick="selectActivity('Ghosts of the Deep')">Ghosts of the Deep</button>
+                            <button class="activity" type="button" onclick="selectActivity('Spire of the Watcher')">Spire of the Watcher</button>
+                            <button class="activity" type="button" onclick="selectActivity('Duality')">Duality</button>
+                            <button class="activity" type="button" onclick="selectActivity('Grasp of Avarice')">Grasp of Avarice</button>
+                            <button class="activity" type="button" onclick="selectActivity('Prophecy')">Prophecy</button>
+                            <button class="activity" type="button" onclick="selectActivity('Pit of Heresy')">Pit of Heresy</button>
+                            <button class="activity" type="button" onclick="selectActivity('Shattered Throne')">Shattered Throne</button>
+                            <button class="activity" type="button" onclick="selectActivity('Vesper\'s Host')">Vesper's Host</button>
+                        </div>
+                    </div>
+                    <div id="otherActivityContainer" class="column33" style={{display:'none'}}>
+                        <div id="otherActivityButtonContainer" class="column50">
+                            <p class="typeText">Other Activites:</p>
+                            <button class="activity" type="button" onclick="selectActivity('The Final Shape')">The Final Shape</button>
+                            <button class="activity" type="button" onclick="selectActivity('Lightfall')">Lightfall</button>
+                            <button class="activity" type="button" onclick="selectActivity('Witch Queen')">Witch Queen</button>
+                            <button class="activity" type="button" onclick="selectActivity('Shared Wisdom')">Shared Wisdom</button>
+                        </div>    
+                    </div>
+
+                </div>
         </div>
-            );
+        <div class="encContainer">
+                <div id="encounterContainer" class="column33">
+                    <div class="column50">
+                        <p class="typeText" id="encountertext">Encounter:</p>
+                        <button id="encounter0button" class="encounter" type="button" onclick="selectEncounter('encounter0button')" style={{display:'none'}}>Chest 1</button>
+                        <button id="encounter1button" class="encounter" type="button" onclick="selectEncounter('encounter1button')" style={{display:'none'}}>1: Substratum</button>
+                        <button id="encounter1hbutton" class="encounter" type="button" onclick="selectEncounter('encounter1hbutton')" style={{display:'none'}}>Chest 1</button>
+                        <button id="encounter2button" class="encounter" type="button" onclick="selectEncounter('encounter2button')" style={{display:'none'}}>2: Dissipation</button>
+                        <button id="encounter2hbutton" class="encounter" type="button" onclick="selectEncounter('encounter2hbutton')" style={{display:'none'}}>Chest 1</button>
+                        <button id="encounter3button" class="encounter" type="button" onclick="selectEncounter('encounter3button')" style={{display:'none'}}>3: Repository</button>
+                        <button id="encounter3hbutton" class="encounter" type="button" onclick="selectEncounter('encounter3hbutton')" style={{display:'none'}}>Wall / Chest 4</button>
+                        <button id="encounter4button" class="encounter" type="button" onclick="selectEncounter('encounter4button')" style={{display:'none'}}>4: Verity</button>
+                        <button id="encounter4hbutton" class="encounter" type="button" onclick="selectEncounter('encounter4hbutton')" style={{display:'none'}}>Chest 2</button>
+                        <button id="encounter5button" class="encounter" type="button" onclick="selectEncounter('encounter5button')" style={{display:'none'}}>5: The Witness</button>
+                        <button id="otherEncounter1button" class="encounter" type="button" onclick="selectEncounter('otherEncounter1button')" style={{display:'none'}}>1: Transmigration</button>
+                        <button id="otherEncounter2button" class="encounter" type="button" onclick="selectEncounter('otherEncounter2button')" style={{display:'none'}}>2: Temptation</button>
+                        <button id="otherEncounter3button" class="encounter" type="button" onclick="selectEncounter('otherEncounter3button')" style={{display:'none'}}>3: Exegesis</button>
+                        <button id="otherEncounter4button" class="encounter" type="button" onclick="selectEncounter('otherEncounter4button')" style={{display:'none'}}>4: Requiem</button>
+                        <button id="otherEncounter5button" class="encounter" type="button" onclick="selectEncounter('otherEncounter5button')" style={{display:'none'}}>5: Ascent</button>
+                        <button id="otherEncounter6button" class="encounter" type="button" onclick="selectEncounter('otherEncounter6button')" style={{display:'none'}}>6: Dissent</button>
+                        <button id="otherEncounter7button" class="encounter" type="button" onclick="selectEncounter('otherEncounter7button')" style={{display:'none'}}>7: Iconoclasm</button>
+                        <button id="otherEncounter8button" class="encounter" type="button" onclick="selectEncounter('otherEncounter8button')" style={{display:'none'}}>8: Desperate Measures</button>
+                    </div>
+                    </div>
+                </div>
+                <div class="flex-parent selectorButtons" id="diffButtons" style={{display: 'flex'}}>
+                    <button id="difficultyNormalbutton" class="difficulty" type="button" onclick="selectDifficulty(false)">Normal</button>
+                    <button id="difficultyMasterbutton" class="difficulty" type="button" onclick="selectDifficulty(true)">Master</button>
+                </div>
+                <div class="queueOptions">
+            <div>
+                <p id="queueString" class="queueString">!queue</p>
+            </div>
+            <button type="button" onclick="copyButton()">Copy to Clipboard</button>
+            </div>
+            <div class="flex-parent botsdiv">
+            <a class = "bots" id ="TCT" href="https://www.twitch.tv/travelerschosenteam"> Travelers Chosen Team </a>
+            <a class = "bots" id ="LB9" href="https://www.twitch.tv/luckbot9"> Luckbot9 </a>
+            <a class = "bots" id ="GDB" href="https://www.twitch.tv/guardiandownbot"> Guardian Down Bot </a>
+            </div>
+            <div id="embed1" class="embed"></div>
+            <div id="embed2" class="embed"></div>
+            <div id="embed3" class="embed"></div>
+            </div>
+    );
 };
 
-function clickme(){
-    //alert('You Clicked me!')
-    document.getElementById("temp").style.display = "none";
-}
 
 {
     const urlParams = new URLSearchParams(window.location.search);
@@ -33,9 +121,9 @@ function clickme(){
     //var h = window.innerHeight/2.7;
     var h = window.innerHeight*.27
     var w = window.innerWidth
-    /*console.log(window.innerHeight)
+    console.log(window.innerHeight)
     console.log(window.innerWidth)
-    console.log(h)*/
+    console.log(h)
     
     /*var options1 = {
         width: "33%",
