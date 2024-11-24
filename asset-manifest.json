@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/TravelersChosen.Org/static/css/main.9de0b155.css",
-    "main.js": "/TravelersChosen.Org/static/js/main.7f26d899.js",
-    "static/js/453.e881d3b6.chunk.js": "/TravelersChosen.Org/static/js/453.e881d3b6.chunk.js",
-    "static/media/logo.png": "/TravelersChosen.Org/static/media/logo.5634147aaa0897043985.png",
-    "index.html": "/TravelersChosen.Org/index.html",
-    "main.9de0b155.css.map": "/TravelersChosen.Org/static/css/main.9de0b155.css.map",
-    "main.7f26d899.js.map": "/TravelersChosen.Org/static/js/main.7f26d899.js.map",
-    "453.e881d3b6.chunk.js.map": "/TravelersChosen.Org/static/js/453.e881d3b6.chunk.js.map"
+    "main.css": "/static/css/main.9de0b155.css",
+    "main.js": "/static/js/main.5f5028f7.js",
+    "static/js/453.e881d3b6.chunk.js": "/static/js/453.e881d3b6.chunk.js",
+    "static/media/logo.png": "/static/media/logo.5634147aaa0897043985.png",
+    "index.html": "/index.html",
+    "main.9de0b155.css.map": "/static/css/main.9de0b155.css.map",
+    "main.5f5028f7.js.map": "/static/js/main.5f5028f7.js.map",
+    "453.e881d3b6.chunk.js.map": "/static/js/453.e881d3b6.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9de0b155.css",
-    "static/js/main.7f26d899.js"
+    "static/js/main.5f5028f7.js"
   ]
 }
