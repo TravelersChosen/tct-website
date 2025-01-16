@@ -1,4 +1,8 @@
 // filename -App.js
+//<Route
+//path="/queuehelper"
+//element={<QueueHelper />}
+///>
 
 import React from "react";
 import "./App.css";
@@ -8,9 +12,10 @@ import {
     Routes,
     Route,
 } from "react-router-dom";
-import About from "./components/pages/about";
+import About from "./about";
 import QueueHelper from "./components/pages/queuehelper";
 import Homepage from "./components/pages/homepage";
+import CheckpointList from "./components/pages/checkpointlist";
 
 function App() {
     return (
@@ -19,9 +24,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/about" element={<About />} />
+                
                 <Route
-                    path="/queuehelper"
-                    element={<QueueHelper />}
+                    path="/checkpointlist"
+                    element={<CheckpointList />}
                 />
             </Routes>
         </Router>
