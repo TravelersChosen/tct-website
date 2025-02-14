@@ -8,9 +8,11 @@ import {
     NavBtn,
     NavBtnLink,
 } from "../NavbarElements";
+import { HashRouter, Routes, Route } from 'react-router-dom';
 
 const Navbar = () => {
     return (
+        
         <>
             <Nav>
                 <Bars />
@@ -24,7 +26,7 @@ const Navbar = () => {
                     <NavLink to="/queuehelper" activeStyle>
                         Queue Helper
                     </NavLink>
-                    <NavLink to="/checkpointlist" activeStyle>
+                    <NavLink to="/checkpointlist" activeStyle> {/*add reloadDocument*/}
                         CheckpointList
                     </NavLink>
                     <NavLink to= "/" ><img src={logo} style={{width:'10%'}}/></NavLink>

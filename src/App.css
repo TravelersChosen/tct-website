@@ -1,4 +1,4 @@
-.App {
+.h1 {
   text-align: center;
 }
 
@@ -24,9 +24,32 @@
   color: white;
 }
 
-.luckbot9-link, .travelersChosen-link, .guardiandownbot-link, .d2checkpoints-link{
+.luckbot9-link, .travelersChosen-link, .guardiandownbot-link, .d2checkpoints-link, .d2chests-link{
   color: white;
+  margin-top: 1%;
 }
+
+.travelersChosen-link{
+  position: relative;
+  bottom: 12px;
+}
+.guardiandownbot-link{
+  position: relative;
+  bottom: 12px;
+}
+.luckbot9-link{
+  position: relative;
+  bottom: 12px;
+}
+.d2checkpoints-link{
+  position: relative;
+  bottom: 12px;
+}
+.d2chests-link{
+  position: relative;
+  bottom: 12px;
+}
+
 
 /*@keyframes App-logo-spin {
   from {
