@@ -1,11 +1,32 @@
 body{
     /*background-image: url(https://lh3.googleusercontent.com/d/1ms19u8vMjzmtivoDt8DYkzD4lTrrfrjv=w500?authuser=0);*/
-    background-color: antiquewhite;
+    background-color: #282c34;
     background-size:cover;
     background-repeat: no-repeat;
 }
-.title{
+.title, .text{
     text-align: center;
+    color:antiquewhite;
+  
+}
+.text{
+  font-style: italic;
+}
+.bungie-name{
+  color:whitesmoke
+}
+.copy{
+  background-color: red; 
+  color: white;
+  padding: 15px 32px;
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+  margin-bottom: 1%;
+  font-size: 16px;
+  width: 50%;
+  border-radius: 8px;
+  visibility: hidden;
+
 }
 .queuehelpertable {
     display: grid;
@@ -19,6 +40,22 @@ body{
     grid-template-rows: 50px auto auto;
     text-align: center;
     display: none;
+  }
+  .foot{
+    grid-row-start: 10;
+  }
+  #TwitchBotsButton{
+    background-color: thistle; /* Green */
+    color: black;
+    margin-right: 2.5%;
+    margin-left: 2%;
+    margin-bottom: 1%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 15%;
+    border-radius: 8px;
   }
 
   .specific_selectors button{
@@ -59,5 +96,68 @@ body{
     border-radius: 8px;
   
   }
+  #queueString{
+    color:red;
+  }
 
+  #overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+    cursor: pointer;
+  }
   
+  #text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 140px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -75px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+  }

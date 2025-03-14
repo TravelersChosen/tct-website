@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '../../logo.png';
+import logo from '../../Bot_Icons/logo.png';
 import {
     Nav,
     NavLink,
@@ -26,9 +26,13 @@ const Navbar = () => {
                     <NavLink to="/queuehelper" activeStyle>
                         Queue Helper
                     </NavLink>
-                    <NavLink to="/checkpointlist" activeStyle> {/*add reloadDocument*/}
-                        CheckpointList
+                    {<NavLink to="/checkpointlist" activeStyle> 
+                        Checkpoint List
+                    </NavLink>}
+                    <NavLink to="/twitchbots" activeStyle> {/*add reloadDocument*/}
+                        Twitch Checkpoint Bots
                     </NavLink>
+                    
                     <NavLink to= "/" ><img src={logo} style={{width:'10%'}}/></NavLink>
                     {/* Second Nav */}
                     {/* <NavBtnLink to='/sign-in'>Sign In</NavBtnLink> */}

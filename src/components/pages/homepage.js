@@ -1,33 +1,26 @@
-import logo from '../../logo.png';
-import GDB from '../../GDB Logo.png';
-import D2Ch from'../../d2chests.png';
-import LB9 from '../../LB9.png';
+import logo from '../../Bot_Icons/logo.png';
+import GDB from '../../Bot_Icons/GDB.png';
+import D2Ch from'../../Bot_Icons/d2chests.png';
+import LB9 from '../../Bot_Icons/LB9.png';
 import '../../App.css';
 
 
-{
-var activitytype = 1;
-var activity = "";
-var activity_found = false;
-var encounter = "";
-var encounter_found = false;
-var difficulty = false;
-var difficulty_found = false;
-
-var bungiename = "";
-var bungiename_found = false;
-
-var queueString = "";
-}
 function Homepage() {
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <h1>
-          Travelers Chosen Team Bots
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/CmMLaFfdsCY?si=G55AY9A-kpjuBCnc" title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+
+        <h1 >
+        <a id = "bots" href= "http://travelerschosen.org/#/twitchbots">Travelers Chosen Team Bots</a>
         </h1>
-        <div>
+        
+        {/*<div>
           <img src = {logo} width="45px" height="45px"/>
           <a
             className="travelersChosen-link"
@@ -85,6 +78,17 @@ function Homepage() {
           D2Chests
         </a>
         </div>
+        <div>
+          <img src = {logo} width="45px" height="45px"/>
+        <a
+          className="destinycheckpoints-link"
+          href="https://twitch.tv/destinycheckpoints"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          DestinyCheckpoints
+        </a>
+        </div>*/}
       </header>
       
     </div>

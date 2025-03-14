@@ -1,0 +1,15 @@
+.embed-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.twitch-embed {
+  width: 100%;
+  max-width: 500px; /* Adjust the max width as needed */
+}
+#head{
+    text-align: center;
+    color:whitesmoke
+}

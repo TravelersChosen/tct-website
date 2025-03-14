@@ -1,9 +1,9 @@
 // pages/about.js
 import '../../checkpointlist.css';
-import logo from '../../logo.png';
-import GDB from '../../GDB Logo.png';
-import D2Ch from'../../d2chests.png';
-import LB9 from '../../LB9.png';
+import logo from '../../Bot_Icons/logo.png'
+import GDB from '../../Bot_Icons/GDB.png';
+import D2Ch from'../../Bot_Icons/d2chests.png';
+import LB9 from '../../Bot_Icons/LB9.png';
 import { useLocation, useEffect, useState } from 'react';
 
 const CheckpointList = () => {
@@ -38,6 +38,10 @@ const CheckpointList = () => {
           <div className="column">
             <p className='name'>D2Chests Bot</p>
             <ul id = "D2Chests"></ul>
+          </div>
+          <div className="column">
+            <p className='name'>DestinyCheckpoints Bot</p>
+            <ul id = "DestinyCheckpoints"></ul>
           </div>
         </div>
       </header>
@@ -90,6 +94,8 @@ waitForElm('.CheckpointList').then((elm) => {
       getData(glink+"2090837855", "D2Checkpoints")
      
       getData(glink+"1882844670", "D2Chests")
+
+      getData(glink+"976579848", "DestinyCheckpoints")
     }
   
 function getData(url, botName){

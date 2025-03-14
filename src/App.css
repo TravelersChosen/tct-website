@@ -1,5 +1,11 @@
 .h1 {
   text-align: center;
+  color: white;
+}
+#bots{
+  text-align: center;
+  color: white;
+  text-decoration: none;
 }
 
 .App-logo {
@@ -24,7 +30,7 @@
   color: white;
 }
 
-.luckbot9-link, .travelersChosen-link, .guardiandownbot-link, .d2checkpoints-link, .d2chests-link{
+.luckbot9-link, .travelersChosen-link, .guardiandownbot-link, .d2checkpoints-link, .d2chests-link, .destinycheckpoints-link{
   color: white;
   margin-top: 1%;
 }
@@ -46,6 +52,11 @@
   bottom: 12px;
 }
 .d2chests-link{
+  position: relative;
+  bottom: 12px;
+}
+
+.destinycheckpoints-link{
   position: relative;
   bottom: 12px;
 }
