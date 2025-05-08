@@ -1,5 +1,5 @@
 import React, { act } from "react";
-import "../../queuehelper.css"
+import "../../css/queuehelper.css"
 import { useState, useEffect } from 'react'
 
 import TCT from '../../Bot_Icons/logo.png';
@@ -282,7 +282,7 @@ function findBots(){
     if(activity == "SW"){
         let acti = document.createElement('a');
         let imgicon = document.createElement('img')
-        console.log(botAbriv[botNames['GuardianDownBot']])
+        //console.log(botAbriv[botNames['GuardianDownBot']])
         imgicon.src = GDB
         imgicon.width = 90
         acti.id = "BotButtons"  
@@ -293,7 +293,7 @@ function findBots(){
     else{
         for(let i = 0; i < botData.length; i++)
             {
-                console.log(botData[i])
+                //console.log(botData[i])
                 // && botData[i][1] == encounter  && botData[i][2].charAt(0).toLowerCase() == difficulty
                 
                 if(abriviations[botData[i][0]] == activity && (botData[i][1].toLowerCase()) == encounter && (botData[i][2].toLowerCase()).startsWith(difficulty)){
@@ -301,16 +301,21 @@ function findBots(){
                     botNames = botData[i][3]
                 }
             }
-            console.log(botNames)
+           // console.log(botNames)
         for(let k = 0; k < botNames.length; k++){   
             let acti = document.createElement('a');
             let imgicon = document.createElement('img')
-            console.log(botAbriv[botNames[k]])
+           // console.log(botAbriv[botNames[k]])
             let bot = botAbriv[botNames[k]]
             imgicon.src = botAbriv[botNames[k]]
             imgicon.width = 90
-            acti.id = "BotButtons"  
-            acti.href = "https://twitch.tv/" + botNames[k]
+            acti.id = "BotButtons" 
+            if (botNames[k] != "Discord"){
+                acti.href = "https://twitch.tv/" + botNames[k]
+            }
+            else{
+                acti.href = 'https://discordapp.com/channels/900591826975752192/1087216431806021642'
+            }
             acti.appendChild(imgicon)
             copyBut.appendChild(acti)
         }
@@ -480,7 +485,7 @@ function selectDifficulty(selencounter, selactivity){
     let temp = document.getElementById("Difficulty")
     removeButtons(temp)
     for(let i = 0; i < botData.length; i++){
-        if((botData[i][0] == selactivity && botData[i][1] == selencounter) &&(botData[i][2] == "Master" || botData[i][2] == "Normal")){
+        if((botData[i][0] == selactivity && botData[i][1] == selencounter) &&(botData[i][2] == "Master" || botData[i][2] == "Normal" || botData[i][2] == 'Ultimatum')){
             
             let acti = document.createElement('button');
             acti.innerText = botData[i][2]
@@ -590,11 +595,9 @@ for(let i = 0; i < rows.length; i++){
     temprow[3] = botName
     s+= temprow[2] + "\n"
     addActivity(temprow)
-    //}
 }
 
 let t = document.getElementById("testing")
-//t.innerText = botData
 
 }
 /// Activity, Checkpoint, Difficulty, Character, Bots = {}
@@ -608,18 +611,13 @@ let t = document.getElementById("testing")
 
 function addActivity(rows){//activity, checkpoint, difficulty, botName){
     let activity = rows[0].replace("&#39;", "\'")
-    //console.log(activity)
     let checkpoint = rows[1]
     let difficulty = rows[2]
     let botName = rows[3]
     let checkitem = [activity, checkpoint, difficulty]
     let item = []
     let exist = activityExists(checkitem)
-    //console.log(exist[0])
     if(exist[0]){
-        //console.log("yes")
-        //add bot to the bot list
-        //console.log(botData[exist[1]][3])
         if(!botData[exist[1]][3].includes(botName))
             botData[exist[1]][3].push(botName)
     }
@@ -627,9 +625,6 @@ function addActivity(rows){//activity, checkpoint, difficulty, botName){
         item = [activity, checkpoint, difficulty, [botName]]
         botData.push(item)
     }
-    //botData = botData.filter(item => item !== undefined)
-    //console.log(item)
-    
 }
 
 function activityExists(values){
