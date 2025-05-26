@@ -1,0 +1,15 @@
+.FAQ h1{
+    text-align: center;
+    color: white;
+  }
+
+
+.FAQ p{
+    text-align: center;
+    color: white;
+}
+
+iframe {
+    display: block;
+    margin: 0 auto;
+ }

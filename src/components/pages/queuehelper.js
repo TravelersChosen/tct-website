@@ -265,7 +265,7 @@ function bungienamevalidator()
             {
                 bungiename_found = false;
             }
-            if(bungiename_found && bungiename!= "" && activity != "activity" && encounter != "encounter" && (difficulty == 'n' || difficulty == 'm')){
+            if(bungiename_found && bungiename!= "" && activity != "activity" && encounter != "encounter" && (difficulty != '')){
                 valid('green')
                 findBots()
             }

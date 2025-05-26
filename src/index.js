@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+import './css/index.css';
 import reportWebVitals from './reportWebVitals';
 import TabMenu from './TabMenu'
 import Homepage from './components/pages/homepage';
-import About from "./about";
+import About from "./components/pages/about";
 import QueueHelper from "./components/pages/queuehelper";
 import CheckpointList from "./components/pages/checkpointlist";
+import FAQ from './components/pages/FAQ';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -22,7 +23,11 @@ function renderPage(page) {
       root.render(<QueueHelper />)
     } else if (page === 'checkpointlist') {
         root.render(<CheckpointList />)
-    } else{
+    } 
+   else if (page === 'faq') {
+    root.render(<FAQ />)
+      }
+    else{
         root.render(<Homepage />)
     }
   }

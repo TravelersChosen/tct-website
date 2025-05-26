@@ -2,7 +2,7 @@ import logo from '../../Bot_Icons/logo.png';
 import GDB from '../../Bot_Icons/GDB.png';
 import D2Ch from'../../Bot_Icons/d2chests.png';
 import LB9 from '../../Bot_Icons/LB9.png';
-import '../../App.css';
+import '../../css/App.css';
 
 
 function Homepage() {

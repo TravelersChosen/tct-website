@@ -1,5 +1,5 @@
 // pages/about.js
-import '../../checkpointlist.css';
+import '../../css/checkpointlist.css'
 import logo from '../../Bot_Icons/logo.png'
 import GDB from '../../Bot_Icons/GDB.png';
 import D2Ch from'../../Bot_Icons/d2chests.png';
@@ -157,9 +157,6 @@ function process(data, botName) {
             }
           }
         }
-        /*li.onclick = function(){
-          window.location.href = link
-        }*/
         li.innerText += "\n"
         if(botName != "Discord")
           li.href = link

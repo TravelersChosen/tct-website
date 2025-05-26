@@ -1,48 +1,72 @@
-// pages/annual.js
-import TwitchBots from './twitchbots';
-import React, { act, useEffect  } from "react";
-import "../../css/queuehelper.css"
-import { useState } from 'react'
-import { CButton, CCollapse, CCard, CCardBody } from '@coreui/react'
-import "../../css/twitchbots.css"
+import React, { act } from "react";
+
+import { useState, useEffect } from 'react'
+import TCT from '../../Bot_Icons/logo.png';
+import GDB from '../../Bot_Icons/GDB.png';
+import D2CH from'../../Bot_Icons/d2chests.png';
+import LB9 from '../../Bot_Icons/LB9.png';
+import D2CP from '../../Bot_Icons/d2cp.png';
+import DCP from '../../Bot_Icons/dcp.png';
+import DIS from '../../Bot_Icons/dis.png';
 
 
 let glink = "https://docs.google.com/spreadsheets/d/1JmV-28EMiC9q8hnSbtpTprtVjDcrPKPgE_UDuJQIQ8c/edit?gid="
 
 function QueueHelper(){
-    const [visible, setVisible] = useState(false)
-    const twitchChannels = ["Luckbot9", "TravelersChosenTeam", "GuardianDownBot","D2Checkpoints","D2Chests","DestinyCheckpoints", "IceBreakerCatty"]; // Add more channels here
+    const twitchChannels =["Luckbot9", "TravelersChosenTeam", "GuardianDownBot","D2Checkpoints","D2Chests","DestinyCheckpoints", "IceBreakerCatty"]; // Add more channels here
     return (
-        <div className= "Queue-Helper">
+        <div className= "Queue-Helper" >
             <header className="QueueHelper-header">
                 <h1 class = "title">Twitch Checkpoint Bot Queue Helper </h1>
                 <p class="text">This is a Work in Progress, More to be added/changed</p>
             </header>
-            <div class = "specific_selectors">
-                    <button id = "Chests" type ="button" /*onClick={}*/>Chests</button>
-                    <button id = "Pinnicle" /*onClick={}*/>Pinnicle</button>
-                    <button id = "Spoils" /*onClick={}*/ >Spoils</button></div>
-            <div class ="queuehelpertable" >
-                <div  class="Activity_Selector">
-                    <button id = "r" type ="button" onClick={selectRaids}>Raids</button>
-                    <button id = "d" onClick={selectDungeons}>Dungeons</button>
-                    <button id = "sm" onClick={selectStories} >Story Missions</button>
-                    <button id = "sw" onClick={selectSW} >Shared Wisdom</button>
-                </div>
+                <div><center>
+                <button id = "Chests" type ="button" /*onClick={}*/>Chests</button>
+                <button id = "Pinnicle" /*onClick={}*/>Pinnicle</button>
+                <button id = "Spoils" /*onClick={}*/ >Spoils</button>
+                </center></div>
+                <div><center>
+                 <button id = "r" type ="button" onClick={selectRaids}>Raids</button>
+                 <button id = "d" onClick={selectDungeons}>Dungeons</button>
+                 <button id = "sm" onClick={selectStories} >Story Missions</button>
+                 <button id = "sw" onClick={selectSW} >Shared Wisdom</button>
+                 </center></div>
+                 <div>
+                 <center><p>Activities</p>
                 <div id="Activities" class="Activities"></div>
+                <p>Encounters</p>
                 <div id="Encounters" class="Encounters"></div>
+                <p>Difficulty</p>
                 <div id="Difficulty" class="Difficulty"></div>
+                </center>
+                </div>
+                
                 <div id="BungieNameAvaliable" class="BungieNameAvaliable"><div id="name-container">
                 <p class="bungie-name">Bungie Name: <input type="text" id="bungiename" onKeyUp={bungienamevalidator} placeholder="bungiename#0000"></input></p>
                 <p id="queueString">!queue </p>
-                <button type="button" class= "copy" id = "copy" onClick={copyButton}>Copy to Clipboard</button>
+                <button type="button" class= "copy" id = "copy" onClick={copyButton} onMouseLeave={resetButton}>Copy to Clipboard</button>
+                <div id = "bot-buttons"></div>
                 </div>
                 </div>
-            </div>
-            
-        </div>
+                </div>
             );
 };
+
+function outFunc() {
+    var tooltip = document.getElementById("myTooltip");
+    tooltip.innerHTML = "Copy to clipboard";
+  }
+
+function on() {
+    document.getElementById("overlay").style.display = 'block';
+  }
+  
+function off() {
+    document.getElementById("overlay").style.display = "none";
+  }
+
+const botData = [];
+
 const abriviations = {
     "Sundered Doctrine": "SD",
     "Salvation's Edge": "SE", 
@@ -90,6 +114,17 @@ const AllActivitiesDifficulties = [
 	"Lightfall", 
 	"Witch Queen"
 ]
+const botAbriv = {
+    "TravelersChosenTeam": TCT,
+    "Luckbot9": LB9,
+    "D2Chests": D2CH, 
+    "GuardianDownBot": GDB, 
+    "Discord": DIS, 
+    "D2Checkpoints": D2CP,
+    "DestinyCheckpoints": DCP, 
+    "IcebreakerCatty": "IBC"
+
+}
 
 const AllRaids = [
 	"Salvation's Edge", 
@@ -180,14 +215,19 @@ var SpoilCheckpoints = {
 
 var activity = "activity"
 var encounter = "encounter"
-var difficulty = "n"
+var difficulty = "difficulty"
 var bungiename = "bungiename#0000"
 
 function copyButton(){
     let queue = document.getElementById("queueString").innerText
-    console.log(queue)
+    var but = document.getElementById("copy")
+    but.innerHTML = "Copied"
     navigator.clipboard.writeText(queue)
     return;
+}
+function resetButton(){
+    var but = document.getElementById("copy")
+    but.innerHTML = "Copy to Clipboard"
 }
 function isDigit(str) 
         {
@@ -195,44 +235,91 @@ function isDigit(str)
         }
 function bungienamevalidator() 
         {
+            removeBots()
             var testbungiename = document.getElementById('bungiename').value;
             bungiename = testbungiename
             var bungiename_found = true
             var testbungiename_length = testbungiename.length
             if (!isDigit(testbungiename.charAt(testbungiename_length-1)))
             {
-                console.log("Invalid Bungie Name: Missing Digit (-1)",testbungiename.charAt(-1))
                 bungiename_found = false;
             }
             if (!isDigit(testbungiename.charAt(testbungiename_length-2)))
             {
-                console.log("Invalid Bungie Name: Missing Digit (-2)",testbungiename.charAt(-2))
                 bungiename_found = false;
             }
             if (!isDigit(testbungiename.charAt(testbungiename_length-3)))
             {
-                console.log("Invalid Bungie Name: Missing Digit (-3)",testbungiename.charAt(-3))
                 bungiename_found = false;
             }
             if (!isDigit(testbungiename.charAt(testbungiename_length-4)))
             {
-                console.log("Invalid Bungie Name: Missing Digit (-4)",testbungiename.charAt(-4))
                 bungiename_found = false;
             }
             if (testbungiename.charAt(testbungiename_length-5)!='#')
             {
-                console.log("Invalid Bungie Name: Missing #",testbungiename.charAt(-5))
                 bungiename_found = false;
             }
-            if(bungiename_found && bungiename!= "" && activity != "activity" && encounter != "encounter"){
+            if(bungiename_found && bungiename!= "" && activity != "activity" && encounter != "encounter" && (difficulty == 'n' || difficulty == 'm' || difficulty == 'u')){
                 valid('green')
+                findBots()
             }
             else{
                 valid('red')
             }
             createQueueString()
         }
+function findBots(){
+    let copyBut = document.getElementById('bot-buttons')
+    removeBots()
+    let botNames = []
+    if(activity == "SW"){
+        let acti = document.createElement('a');
+        let imgicon = document.createElement('img')
+        //console.log(botAbriv[botNames['GuardianDownBot']])
+        imgicon.src = GDB
+        imgicon.width = 90
+        acti.id = "BotButtons"  
+        acti.href = "https://twitch.tv/GuardianDownBot" 
+        acti.appendChild(imgicon)
+        copyBut.appendChild(acti)
+    }
+    else{
+        for(let i = 0; i < botData.length; i++)
+            {
+                //console.log(botData[i])
+                // && botData[i][1] == encounter  && botData[i][2].charAt(0).toLowerCase() == difficulty
+                
+                if(abriviations[botData[i][0]] == activity && (botData[i][1].toLowerCase()) == encounter && (botData[i][2].toLowerCase()).startsWith(difficulty)){
+                    //console.log((botData[i][2].toLowerCase()).startsWith(difficulty))
+                    botNames = botData[i][3]
+                }
+            }
+           // console.log(botNames)
+        for(let k = 0; k < botNames.length; k++){   
+            let acti = document.createElement('a');
+            let imgicon = document.createElement('img')
+           // console.log(botAbriv[botNames[k]])
+            let bot = botAbriv[botNames[k]]
+            imgicon.src = botAbriv[botNames[k]]
+            imgicon.width = 90
+            acti.id = "BotButtons" 
+            if (botNames[k] != "Discord"){
+                acti.href = "https://twitch.tv/" + botNames[k]
+            }
+            else{
+                acti.href = 'https://discordapp.com/channels/900591826975752192/1087216431806021642'
+            }
+            acti.appendChild(imgicon)
+            copyBut.appendChild(acti)
+        }
+    }
 
+}
+function removeBots(){
+    let copyBut = document.getElementById('bot-buttons')
+    copyBut.innerHTML = ""
+}
 function checkname(){
     var testbungiename = document.getElementById('bungiename').value;
     bungiename = testbungiename
@@ -248,6 +335,7 @@ function removeButtons(element){
     element.innerHTML = ""
 }
 function selectRaids(){
+    data()
     let list = AllRaids
     let temp = document.getElementById("Activities")  
     let encounters = document.getElementById("Encounters")
@@ -255,23 +343,28 @@ function selectRaids(){
     removeButtons(encounters)
     removeButtons(diff)
     removeButtons(temp)
-    
+    let created = []
 
-    for(let i = 0; i < list.length; i++){
-        let acti = document.createElement('button');
-        acti.innerText = list[i];
-        acti.id = "button"
-        acti.onclick = function(){selectEncounters(acti.innerText)}
-        temp.appendChild(acti);
+    for(let i = 0; i < botData.length; i++){ 
+        if (list.includes(botData[i][0]) && !created.includes(botData[i][0])){
+            let acti = document.createElement('button');
+            acti.innerText = botData[i][0];
+            acti.id = "button1"
+            acti.onclick = function(){selectEncounters(acti.innerText); checkname()}
+            temp.appendChild(acti);
+            created.push(botData[i][0])
+            
+        }
+        activity = "activity"
+        encounter = "encounter"
+        difficulty = ""
+        checkname()
+        createQueueString()
     }
-    activity = "activity"
-    encounter = "encounter"
-    difficulty = "n"
-    checkname()
-    createQueueString()
 
 }
 function selectDungeons(){
+    data()
     let list = AllDungeons
     let temp = document.getElementById("Activities")
     let encounters = document.getElementById("Encounters")
@@ -281,20 +374,28 @@ function selectDungeons(){
     removeButtons(temp)
     
 
-    for(let i = 0; i < list.length; i++){
-        let acti = document.createElement('button');
-        acti.innerText = list[i];
-        acti.id = "button"
-        acti.onclick = function(){selectEncounters(acti.innerText)}
-        temp.appendChild(acti);
+    let created = []
+
+    for(let i = 0; i < botData.length; i++){ 
+        if (list.includes(botData[i][0]) && !created.includes(botData[i][0])){
+            //console.log(botData[i][0])
+            let acti = document.createElement('button');
+            acti.innerText = botData[i][0];
+            acti.id = "button1"
+            acti.onclick = function(){selectEncounters(acti.innerText); checkname()}
+            temp.appendChild(acti);
+            created.push(botData[i][0])
+            
+        }
     }
     activity = "activity"
     encounter = "encounter"
-    difficulty = "n"
+    difficulty = ""
     checkname()
     createQueueString()
 }
 function selectStories(){
+    data()
     let list = AllStorys
     let temp = document.getElementById("Activities")
     let encounters = document.getElementById("Encounters")
@@ -303,16 +404,23 @@ function selectStories(){
     removeButtons(diff)
     removeButtons(temp)
     
-    for(let i = 0; i < list.length; i++){
-        let acti = document.createElement('button');
-        acti.innerText = list[i];
-        acti.id = "button"
-        acti.onclick = function(){selectEncounters(acti.innerText)}
-        temp.appendChild(acti);
+    let created = []
+
+    for(let i = 0; i < botData.length; i++){ 
+        if (list.includes(botData[i][0]) && !created.includes(botData[i][0])){
+            //console.log(botData[i][0])
+            let acti = document.createElement('button');
+            acti.innerText = botData[i][0];
+            acti.id = "button1"
+            acti.onclick = function(){selectEncounters(acti.innerText); checkname()}
+            temp.appendChild(acti);
+            created.push(botData[i][0])
+            
+        }
     }
     activity = "activity"
     encounter = "encounter"
-    difficulty = "n"
+    difficulty = ""
     checkname()
     createQueueString()
 }
@@ -336,59 +444,62 @@ function selectSW(){
 
 function selectEncounters(selactivity){
     //console.log(abriviations[selactivity])
+    data()
 
     activity = abriviations[selactivity]
 
-    difficulty = "n"
+    difficulty = ""
     encounter = "encounter"
     createQueueString()
-
-    let list = allEncounters[selactivity]
+    let usedenc = []
     let temp = document.getElementById("Encounters")
     let diff = document.getElementById("Difficulty")
     removeButtons(diff)
     removeButtons(temp)
     checkname()
-
-    for(let i = 0; i < list.length; i++){
-        let acti = document.createElement('button');
-        acti.innerText = list[i];
-        acti.id = "button"
-        acti.onclick = function(){selectDifficulty(acti.innerText, selactivity)}
-        temp.appendChild(acti);
+    //console.log(botData)
+    for(let i = 0; i < botData.length; i++){ 
+        if(botData[i][0] == selactivity && !usedenc.includes(botData[i][1])){
+            //console.log(botData[i][1])
+            let acti = document.createElement('button');
+            acti.innerText = botData[i][1];
+            acti.id = "button1"
+            acti.onclick = function(){selectDifficulty(acti.innerText, selactivity); checkname()}
+            temp.appendChild(acti);
+            usedenc.push(botData[i][1])
+        
+        }
     }
+    checkname()
 
 }
 
 function selectDifficulty(selencounter, selactivity){
+    data()
     let temp = document.getElementById("Difficulty")
     removeButtons(temp)
-    if(AllActivitiesDifficulties.includes(selactivity)){
-
-        for(let i = 0; i < 2; i++){
+    for(let i = 0; i < botData.length; i++){
+        if((botData[i][0] == selactivity && botData[i][1] == selencounter) &&(botData[i][2] == "Master" || botData[i][2] == "Normal")){
+            
             let acti = document.createElement('button');
-            if(i == 0){
-                acti.innerText = "Normal";
-                acti.onclick = function(){diffic("normal")}
-            }
-            else{
-                if(AllStorys.includes(selactivity))
-                    acti.innerText = "Legend";
-                else
-                    acti.innerText = "Master";
-                acti.onclick = function(){diffic("master")}
-            }
-            acti.id = "button";
+            acti.innerText = botData[i][2]
+            acti.onclick = function(){diffic(botData[i][2].toLowerCase()); checkname()}
+            acti.id = "button1";
             temp.appendChild(acti);
         }
     }
-    else {
-        checkname()
+    checkname()
+    //var enc = selencounter.replaceAll(" ", "").split(":")
+    var enc = selencounter.split(" ")
+    //Quick fix for on the verge & no time left Story Missions
+    if (enc[0].toLowerCase() == "on" || enc[0].toLowerCase() == "no"){
+        encounter = enc[2].toLowerCase()
+    }
+    else{
+        encounter = enc[0].toLowerCase()
     }
     
-    var enc = selencounter.replaceAll(" ", "").split(":")
-    encounter = enc[0].toLowerCase()
-    difficulty = "n"
+    difficulty = ""
     createQueueString()
 
 }
@@ -400,25 +511,34 @@ function diffic(d){
 }
 
 function valid(dcolor){
+    
     var string = document.getElementById("queueString")
     var but = document.getElementById("copy")
-    string.style.color = dcolor
+    string.style.color = dcolor  
     but.style.background = dcolor
+    if (dcolor == 'green'){
+        but.style.visibility = 'visible';
+    }
+    else{
+        but.style.visibility = 'hidden';
+    }
 }
 
 
 function data(){
     getData(glink+"822929884", "Discord")
 
-    //getData(glink+"1584931659", "TravelersChosenTeam")
+    getData(glink+"1584931659", "TravelersChosenTeam")
    
-    //getData(glink+"876293126", "Luckbot9")
+    getData(glink+"876293126", "Luckbot9")
    
-   // getData(glink+"272935733", "GuardianDownBot")
+    getData(glink+"272935733", "GuardianDownBot")
    
-    //getData(glink+"2090837855", "D2Checkpoints")
+    getData(glink+"2090837855", "D2Checkpoints")
    
-    //getData(glink+"1882844670", "D2Chests")
+    getData(glink+"1882844670", "D2Chests")
+
+    getData(glink+"976579848", "DestinyCheckpoints")
   }
 
 function getData(url, botName){
@@ -437,7 +557,7 @@ let skipHeader = false
 for (let i = 0; i < data.length; i++) {
   if (data[i - 3] == "/" && data[i - 2] == "t" && data[i - 1] == "r") {
     if(skipHeader){
-      rows.push(cells);
+      rows.push(cells + "\n");
       cells = [];
     }
     skipHeader = true
@@ -453,10 +573,60 @@ for (let i = 0; i < data.length; i++) {
       j++;
     }
     if(tempString != "")
+        if(tempString.charAt[0] === ",")
+            tempString = tempString.slice(1)
       cells.push(tempString);
     tempString = "";
   }
 }
+let s = ""
+
+for(let i = 0; i < rows.length; i++){
+    const temprow = rows[i].split(",")
+    //Get Rid of header
+    if(temprow[2] == "")
+        temprow[2] = "Normal"
+    temprow[3] = botName
+    s+= temprow[2] + "\n"
+    addActivity(temprow)
+}
+
+let t = document.getElementById("testing")
+
+}
+/// Activity, Checkpoint, Difficulty, Character, Bots = {}
+/*
+0 = Activity
+1 = Checkpoint
+2 = Difficulty
+3 = BLANK / Bot Name
+4 = "Character"
+*/
+
+function addActivity(rows){//activity, checkpoint, difficulty, botName){
+    let activity = rows[0].replace("&#39;", "\'")
+    let checkpoint = rows[1]
+    let difficulty = rows[2]
+    let botName = rows[3]
+    let checkitem = [activity, checkpoint, difficulty]
+    let item = []
+    let exist = activityExists(checkitem)
+    if(exist[0]){
+        if(!botData[exist[1]][3].includes(botName))
+            botData[exist[1]][3].push(botName)
+    }
+    else{
+        item = [activity, checkpoint, difficulty, [botName]]
+        botData.push(item)
+    }
+}
+
+function activityExists(values){
+    for(let i = 0; i < botData.length; i++){
+        if(botData[i][0] == values[0] && botData[i][1] == values[1] && botData[i][2] == values[2])
+            return [true, i];
+    }
+    return [false, -1]
 }
 
 const TwitchEmbed = ({ channel }) => {
@@ -509,5 +679,6 @@ const MultiTwitchEmbed = ({ channels }) => {
     </div>
   );
 };
+
 
 export default QueueHelper;

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import "../../twitchbots.css"
+import "../../css/twitchbots.css"
 
 function TwitchBots() {
   const twitchChannels = ["Luckbot9", "TravelersChosenTeam", "GuardianDownBot","D2Checkpoints","D2Chests","DestinyCheckpoints", "IceBreakerCatty"]; // Add more channels here

@@ -5,10 +5,9 @@ import {
     NavLink,
     Bars,
     NavMenu,
-    NavBtn,
-    NavBtnLink,
-} from "../NavbarElements";
-import { HashRouter, Routes, Route } from 'react-router-dom';
+} from "../NavbarElements";<NavLink to="/twitchbots" activeStyle> {/*add reloadDocument*/}
+                        Twitch Checkpoint Bots
+                    </NavLink>
 
 const Navbar = () => {
     return (
@@ -26,11 +25,17 @@ const Navbar = () => {
                     <NavLink to="/queuehelper" activeStyle>
                         Queue Helper
                     </NavLink>
+                    {/*<NavLink to="/queuehelperNEW" activeStyle>
+                        Queue Helper NEW
+                    </NavLink>*/}
                     {<NavLink to="/checkpointlist" activeStyle> 
                         Checkpoint List
                     </NavLink>}
                     <NavLink to="/twitchbots" activeStyle> {/*add reloadDocument*/}
                         Twitch Checkpoint Bots
+                    </NavLink>
+                    <NavLink to="/faq" activeStyle> {/*add reloadDocument*/}
+                        FAQ
                     </NavLink>
                     
                     <NavLink to= "/" ><img src={logo} style={{width:'10%'}}/></NavLink>
